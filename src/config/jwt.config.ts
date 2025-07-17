@@ -3,6 +3,17 @@ import { JwtModuleOptions } from '@nestjs/jwt';
 
 export const getJWTConfig = async (
   configService: ConfigService,
-): Promise<JwtModuleOptions> => ({
-  secret: configService.get('JWT_SECRET'),
-});
+): Promise<JwtModuleOptions> => {
+  const secret = configService.get<string>('JWT_SECRET');
+
+  if (!secret) {
+    throw new Error('JWT_SECRET is not defined in environment variables');
+  }
+
+  return {
+    secret,
+    signOptions: {
+      expiresIn: '1h',
+    },
+  };
+};
