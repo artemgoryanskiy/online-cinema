@@ -1,19 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../user/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { AuthDto } from './dto/auth.dto';
 import { hash, genSalt, compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { IAuthResponse } from './auth.interface';
+import { RefreshTokenDto } from './dto/refreshToken.dto';
 
-interface AuthResponse {
-  user: {
-    _id: Types.ObjectId;
-    email: string;
-    isAdmin?: boolean;
-  };
-  refreshToken: string;
-  accessToken: string;
+interface IJwtPayload {
+  userId: string;
+  iat?: number;
+  exp?: number;
 }
 
 @Injectable()
@@ -31,6 +29,7 @@ export class AuthService {
       email: dto.email,
       password: await hash(dto.password, salt),
     });
+    await newUser.save();
     const tokens = await this.issueTokenPair(String(newUser._id));
     return {
       user: this.returnUserFields(newUser),
@@ -38,8 +37,23 @@ export class AuthService {
     };
   }
 
-  async login(dto: AuthDto): Promise<AuthResponse> {
+  async login(dto: AuthDto): Promise<IAuthResponse> {
     const user = await this.validateUser(dto);
+    const tokens = await this.issueTokenPair(String(user._id));
+    return {
+      user: this.returnUserFields(user),
+      ...tokens,
+    };
+  }
+
+  async getNewTokens(dto: RefreshTokenDto): Promise<IAuthResponse> {
+    if (!dto.refreshToken) throw new UnauthorizedException('Please login');
+    const result = await this.jwtService.verifyAsync<IJwtPayload>(
+      dto.refreshToken,
+    );
+    if (!result) throw new UnauthorizedException('Invalid refresh token');
+    const user = await this.userModel.findById(result.userId);
+    if (!user) throw new UnauthorizedException('User not found');
     const tokens = await this.issueTokenPair(String(user._id));
     return {
       user: this.returnUserFields(user),
