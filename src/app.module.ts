@@ -28,6 +28,6 @@ import { MovieModule } from './movie/movie.module';
     MovieModule,
   ],
   controllers: [AppController],
-  providers: [AppService, MovieService],
+  providers: [AppService],
 })
 export class AppModule {}
