@@ -1,0 +1,24 @@
+### CREATE ACTOR
+POST {{URL}}/actor
+Authorization: Bearer {{TOKEN}}
+
+### UPDATE ACTOR
+PUT {{URL}}/actor/688b81d7ae849efd56c6bc33
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "Леонардо ДиКаприо",
+  "slug": "leonardo-dicaprio",
+  "photo": "https://example.com/photos/leonardo-dicaprio.jpg"
+}
+
+###BY-SLUG
+GET {{URL}}/actor/by-slug/leonardo-dicaprio
+
+###BY-ID
+GET {{URL}}/actor/688b81d7ae849efd56c6bc33
+Authorization: Bearer {{TOKEN}}
+
+### GET ALL
+GET {{URL}}/actor

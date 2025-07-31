@@ -28,9 +28,6 @@ export class CreateMovieDto {
   title: string;
 
   @IsString()
-  description: string;
-
-  @IsString()
   slug: string;
 
   @IsObject()

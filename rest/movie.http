@@ -1,0 +1,34 @@
+### CREATE MOVIE
+POST {{URL}}/movie
+Authorization: Bearer {{TOKEN}}
+
+### UPDATE MOVIE
+PUT {{URL}}/movie/688b846c3f394ba67af689e3
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "poster": "https://example.com/posters/avengers-endgame-small.jpg",
+  "bigPoster": "https://example.com/posters/avengers-endgame-big.jpg",
+  "title": "Мстители: Финал",
+  "slug": "avengers-endgame",
+  "parameters": {
+    "year": 2019,
+    "duration": 181,
+    "country": "США"
+  },
+  "videoUrl": "https://example.com/videos/avengers-endgame.mp4",
+  "genres": ["688b7f7bae849efd56c6bc2a"],
+  "actors": ["688b81d7ae849efd56c6bc33"],
+  "isSendTelegram": true
+}
+
+###BY-SLUG
+GET {{URL}}/movie/by-slug/leonardo-dicaprio
+
+###BY-ID
+GET {{URL}}/movie/688b81d7ae849efd56c6bc33
+Authorization: Bearer {{TOKEN}}
+
+### GET ALL
+GET {{URL}}/movie

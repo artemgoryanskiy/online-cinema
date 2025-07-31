@@ -1,0 +1,25 @@
+### CREATE
+POST {{URL}}/genre
+Authorization: Bearer {{TOKEN}}
+
+### UPDATE
+PUT {{URL}}/genre/688b7f7bae849efd56c6bc2a
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "name": "Экшен",
+  "slug": "action",
+  "description": "Динамичные фильмы с захватывающими сценами действия, погонями и боевыми сценами",
+  "icon": "⚡"
+}
+
+### BY-SLUG
+GET {{URL}}/genre/by-slug/action
+
+### BY-ID
+GET {{URL}}/genre/688b7f7bae849efd56c6bc2a
+Authorization: Bearer {{TOKEN}}
+
+### ALL-GENRES
+GET {{URL}}/genre

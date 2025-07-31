@@ -6,6 +6,7 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
   UsePipes,
 } from '@nestjs/common';
@@ -45,7 +46,7 @@ export class MovieController {
     return this.movieService.getMovies(searchTerm);
   }
 
-  @Post('count-opened')
+  @Put('count-opened')
   @HttpCode(200)
   async updateCountOpened(@Body('slug') slug: string) {
     return this.movieService.updateCountOpened(slug);
@@ -65,8 +66,7 @@ export class MovieController {
     return this.movieService.createMovie();
   }
 
-  @UsePipes(new IdValidationPipe())
-  @Post(':id')
+  @Put(':id')
   @Auth('admin')
   @HttpCode(200)
   async updateMovie(

@@ -31,7 +31,7 @@ export class UserService {
     user.email = dto.email;
     if (dto.isAdmin || dto.isAdmin === false) user.isAdmin = dto.isAdmin;
     await user.save();
-    return;
+    return user;
   }
 
   async getUserCount() {

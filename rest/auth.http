@@ -1,0 +1,54 @@
+### РЕГИСТРАЦИЯ
+POST {{URL}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@test.ru",
+  "password": "123456",
+  "isAdmin": "true"
+}
+
+### ЛОГИН
+POST {{URL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@test.ru",
+  "password": "123456"
+}
+
+### USER PROFILE
+GET {{URL}}/user/profile
+Authorization: Bearer {{TOKEN}}
+
+### UPDATE PROFILE
+PUT {{URL}}/user/profile
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+    "email": "test@test.ru",
+    "isAdmin": "true"
+}
+
+### UPDATE USER
+PUT {{URL}}/user/688a62a5905689cc7e9d628e
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "email": "test@test.ru",
+  "isAdmin": "true"
+}
+
+### COUNT
+GET {{URL}}/user/count
+Authorization: Bearer {{TOKEN}}
+
+### ALL USERS
+GET {{URL}}/user/
+Authorization: Bearer {{TOKEN}}
+
+### DELETE USER
+DELETE {{URL}}/user/688a62a5905689cc7e9d628e
+Authorization: Bearer {{TOKEN}}

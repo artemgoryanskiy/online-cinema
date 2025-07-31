@@ -30,9 +30,6 @@ export class Movie {
   @Prop()
   title: string;
 
-  @Prop()
-  description: string;
-
   @Prop({ unique: true })
   slug: string;
 
@@ -48,10 +45,10 @@ export class Movie {
   @Prop()
   videoUrl: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }] })
   genres: Genre[];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Actor' })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Actor' }] })
   actors: Actor[];
 
   @Prop({ default: false })
