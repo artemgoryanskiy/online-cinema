@@ -14,8 +14,8 @@ export class User {
   @Prop({ default: false })
   isAdmin?: boolean;
 
-  @Prop({ default: [] })
-  favorites?: [];
+  @Prop({ default: [], type: [{ type: Types.ObjectId, ref: 'Movie' }] })
+  favorites?: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

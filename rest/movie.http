@@ -3,7 +3,7 @@ POST {{URL}}/movie
 Authorization: Bearer {{TOKEN}}
 
 ### UPDATE MOVIE
-PUT {{URL}}/movie/688b846c3f394ba67af689e3
+PUT {{URL}}/movie/6891e5684b389b0313dbfd30
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
@@ -18,8 +18,8 @@ Content-Type: application/json
     "country": "США"
   },
   "videoUrl": "https://example.com/videos/avengers-endgame.mp4",
-  "genres": ["688b7f7bae849efd56c6bc2a"],
-  "actors": ["688b81d7ae849efd56c6bc33"],
+  "genres": ["6891d54d880af8d3eefa3657"],
+  "actors": ["6891d569880af8d3eefa365c"],
   "isSendTelegram": true
 }
 

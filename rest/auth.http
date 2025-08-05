@@ -21,6 +21,19 @@ Content-Type: application/json
 GET {{URL}}/user/profile
 Authorization: Bearer {{TOKEN}}
 
+### USER PROFILE/FAVORITES
+GET {{URL}}/user/profile/favorites
+Authorization: Bearer {{TOKEN}}
+
+### USER PROFILE/FAVORITES TOOGLE
+PUT {{URL}}/user/profile/favorites
+Authorization: Bearer {{TOKEN}}
+Content-Type: application/json
+
+{
+  "movieId": "6891e5684b389b0313dbfd30"
+}
+
 ### UPDATE PROFILE
 PUT {{URL}}/user/profile
 Authorization: Bearer {{TOKEN}}

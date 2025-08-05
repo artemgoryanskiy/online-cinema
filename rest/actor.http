@@ -3,7 +3,7 @@ POST {{URL}}/actor
 Authorization: Bearer {{TOKEN}}
 
 ### UPDATE ACTOR
-PUT {{URL}}/actor/688b81d7ae849efd56c6bc33
+PUT {{URL}}/actor/6891d569880af8d3eefa365c
 Authorization: Bearer {{TOKEN}}
 Content-Type: application/json
 
