@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Actor } from './actor.schema';
-import { Model } from 'mongoose';
+import { Actor, ActorDocument } from './actor.schema';
+import { Model, Types } from 'mongoose';
 import { ActorDto } from './actor.dto';
 
 @Injectable()
@@ -10,13 +10,13 @@ export class ActorService {
     @InjectModel(Actor.name) private readonly actorModel: Model<Actor>,
   ) {}
 
-  async bySlug(slug: string) {
+  async bySlug(slug: string): Promise<ActorDocument> {
     const actor = await this.actorModel.findOne({ slug }).exec();
     if (!actor) throw new NotFoundException('Actor not found');
     return actor;
   }
 
-  async getActors(searchTerm?: string) {
+  async getActors(searchTerm?: string): Promise<any[]> {
     let options = {};
     if (searchTerm) {
       options = {
@@ -43,13 +43,13 @@ export class ActorService {
       .exec();
   }
 
-  async byId(_id: string) {
+  async byId(_id: string): Promise<ActorDocument> {
     const actor = await this.actorModel.findById(_id).exec();
     if (!actor) throw new NotFoundException('Actor not found');
     return actor;
   }
 
-  async createActor() {
+  async createActor(): Promise<Types.ObjectId> {
     const defaultValues: ActorDto = {
       name: '',
       slug: '',
@@ -59,7 +59,7 @@ export class ActorService {
     return actor._id;
   }
 
-  async updateActor(_id: string, dto: ActorDto) {
+  async updateActor(_id: string, dto: ActorDto): Promise<ActorDocument> {
     const updatedActor = await this.actorModel
       .findByIdAndUpdate(_id, dto, {
         new: true,
@@ -69,7 +69,7 @@ export class ActorService {
     return updatedActor;
   }
 
-  async deleteActor(id: string) {
+  async deleteActor(id: string): Promise<ActorDocument> {
     const deletedActor = await this.actorModel.findById(id).exec();
     if (!deletedActor) throw new NotFoundException('Actor not found');
     return deletedActor;
